@@ -1,4 +1,14 @@
 
+@font-face {
+    font-family: 'Trueno';
+    src: local('Trueno'), url(../public/fonts/Trueno/Trueno-wml2.otf) format('opentype');
+  }
 
-
-
+  @font-face {
+    font-family: 'TruenoBold';
+    src: local('Trueno'), url(../public/fonts/Trueno/TruenoExtrabold-05gr.otf) format('opentype');
+  } 
+  @font-face {
+    font-family: 'TruenoLite';
+    src: local('Trueno'), url(../public/fonts/Trueno/TruenoUltralight-DKax.otf) format('opentype');
+  } 
