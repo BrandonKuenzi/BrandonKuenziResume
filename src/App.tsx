@@ -7,7 +7,9 @@ import { greetings } from './content/greetings';
 import { sleep } from './utils/sleep';
 import Scrollbars from 'react-custom-scrollbars';
 import { AnimValue, useScrollValues } from './utils/customHooks/useScrollValues';
-
+import ParallaxImage from './controls/ParallaxImage';
+import codeImg from "./images/codeImg.jpg"
+import laptop from "./images/laptop.jpg"
 
 
 const PageDiv = styled(motion.div)`
@@ -30,8 +32,7 @@ border: 0px solid whitesmoke;
 const MainDiv = styled(motion.div)`
 color: white;
 display: flex;
-padding-left: 20%;
-padding-right: 20%;
+overflow: visible;
 width: 60%;
 flex-direction: column;
 gap:15px;
@@ -39,28 +40,34 @@ align-items: start;
 justify-content: start;
 `
 const TitleDiv = styled(motion.div)`
+padding: 0% 20%;
 font-family: 'TruenoBold';
-font-size: 90px;
+width:100%;
+font-size: 60px;
 color: white;
 `
 const TaglineDiv = styled(motion.div)`
+padding: 0% 20%;
 color: white;
 font-size: 25px;
 font-family: 'TruenoBold';
 `
 const ContentCenterDiv = styled(motion.div)`
+padding: 0% 20%;
 color: white;
 justify-content: center;
 margin-top: 100px;
 width:100%;
 `
 const ContentLeftDiv = styled(motion.div)`
+padding: 0% 20%;
 color: white;
 justify-content: start;
 margin-top: 100px;
 width:100%;
 `
 const ContentRightDiv = styled(motion.div)`
+padding: 0% 20%;
 color: white;
 text-align: end;
 display: flex;
@@ -70,6 +77,7 @@ margin-top: 100px;
 width:100%;
 `
 const TextBoxDiv = styled(motion.div)`
+padding: 0% 20%;
 color: white;
 justify-content: start;
 font-size: 18px;
@@ -200,12 +208,14 @@ function App() {
           <ContentCenterDiv><TaglineDiv>{greeting}</TaglineDiv></ContentCenterDiv>
           <ContentLeftDiv ref={ref1} animate={slideInLeftAnim(animValue1)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentLeftDiv>
           <ContentRightDiv ref={ref2} animate={slideInRightAnim(animValue2)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentRightDiv>
+          <ParallaxImage image={laptop} screenHeightPercent={.4} pageScrollPercent={pageScrollPercent} />
           <ContentLeftDiv ref={ref3} animate={slideInLeftAnim(animValue3)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentLeftDiv>
           <ContentRightDiv ref={ref4} animate={slideInRightAnim(animValue4)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentRightDiv>
           <ContentLeftDiv ref={ref5} animate={slideInLeftAnim(animValue5)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentLeftDiv>
           <ContentRightDiv ref={ref6} animate={slideInRightAnim(animValue6)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentRightDiv>
           <ContentLeftDiv ref={ref7} animate={slideInLeftAnim(animValue7)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentLeftDiv>
           <ContentRightDiv ref={ref8} animate={slideInRightAnim(animValue8)} transition={{ duration: 0 }}><TextBoxDiv>This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?</TextBoxDiv></ContentRightDiv>
+          <ParallaxImage image={codeImg} screenHeightPercent={.5} pageScrollPercent={pageScrollPercent} />
         </MainDiv>
       </Scrollbars>
     </PageDiv >
