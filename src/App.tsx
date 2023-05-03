@@ -174,7 +174,7 @@ function App() {
       observer.disconnect();
     };
   }, []);
-
+  // test
   const slideInRightAnim = (av: AnimValue): AnimationControls => {
     let progress = (1 - Math.abs(av.toCenter)) * 1.5;
     if (progress > 1) progress = 1;
