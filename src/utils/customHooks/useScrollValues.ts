@@ -16,31 +16,35 @@ export const useScrollValues = (pageScrollPercent: number) => {
 	});
 
 	useEffect(() => {
-		const top = (componentRef.current as HTMLDivElement).getBoundingClientRect()
-			.top;
-		const maxHeight = window.innerHeight;
-		const elementHeight = (componentRef.current as HTMLDivElement).scrollHeight;
-		const elementHeightScreenPercent = elementHeight / maxHeight;
-		let toTop = 1 - top / maxHeight;
-		let toCenter = (0.5 - (toTop - elementHeightScreenPercent / 2)) * -2;
-		let toBottom = 1 - toTop + elementHeightScreenPercent / 2;
-		let onScreen = 1;
-		if (toCenter > 0) {
-			onScreen = 1 - (1 - top - elementHeightScreenPercent) / elementHeight;
-			if (onScreen > 1) onScreen = 1;
-		} else if (toCenter <= 0) {
-			onScreen = toTop / elementHeightScreenPercent;
-			if (onScreen > 1) onScreen = 1;
+		if (componentRef.current) {
+			const top = (
+				componentRef.current as HTMLDivElement
+			).getBoundingClientRect().top;
+			const maxHeight = window.innerHeight;
+			const elementHeight = (componentRef.current as HTMLDivElement)
+				.scrollHeight;
+			const elementHeightScreenPercent = elementHeight / maxHeight;
+			let toTop = 1 - top / maxHeight;
+			let toCenter = (0.5 - (toTop - elementHeightScreenPercent / 2)) * -2;
+			let toBottom = 1 - toTop + elementHeightScreenPercent / 2;
+			let onScreen = 1;
+			if (toCenter > 0) {
+				onScreen = 1 - (1 - top - elementHeightScreenPercent) / elementHeight;
+				if (onScreen > 1) onScreen = 1;
+			} else if (toCenter <= 0) {
+				onScreen = toTop / elementHeightScreenPercent;
+				if (onScreen > 1) onScreen = 1;
+			}
+
+			const animValue = {
+				toTop: toTop,
+				toCenter: toCenter,
+				toBottom: toBottom,
+				onScreen: onScreen,
+			};
+
+			setAnimValue(animValue);
 		}
-
-		const animValue = {
-			toTop: toTop,
-			toCenter: toCenter,
-			toBottom: toBottom,
-			onScreen: onScreen,
-		};
-
-		setAnimValue(animValue);
 	}, [componentRef, pageScrollPercent]);
 
 	return {
