@@ -3,7 +3,6 @@ import './App.css';
 import styled from 'styled-components'
 import { AnimationControls, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { randomRangeInt } from './utils/randomRange';
-import { greetings } from './content/greetings';
 import { sleep } from './utils/sleep';
 import Scrollbars from 'react-custom-scrollbars';
 import { AnimValue, useScrollValues } from './utils/customHooks/useScrollValues';
@@ -12,6 +11,11 @@ import codeImg from "./images/codeImg.jpg"
 import laptop from "./images/laptop.jpg"
 import SlidingText from './controls/SlidingText';
 import SubtleRotateText from './controls/SubtleRotateText';
+import TitleDiv from './controls/TitleDiv';
+import TaglineControl from './controls/TaglineControl';
+import TickerTape from './controls/TickerTape';
+import Card from './controls/Card';
+import SenseOfHumor from './controls/SenseOfHumor';
 
 
 const PageDiv = styled(motion.div)`
@@ -41,63 +45,26 @@ gap:15px;
 align-items: center;
 justify-content: center;
 `
-const TitleDiv = styled(motion.div)`
-font-family: 'TruenoBold';
-white-space: nowrap;
-margin-top: 100px;
-width:100%;
-font-size: clamp(10px, 6vw, 100px);
-color: white;
-`
-const TaglineDiv = styled(motion.div)`
-color: white;
-white-space: nowrap;
-margin-top: 10px;
-font-size:  clamp(5px, 2vw, 25px);
-font-family: 'TruenoBold';
-`
-const ContentCenterDiv = styled(motion.div)`
-padding: 0% 20%;
-color: white;
-box-sizing: border-box;
-width:100%;
+const HorizFlexDiv = styled(motion.div)`
+display: flex;
+flex-direction: row;
+align-items: center;
+width: 80%;
+justify-content: space-evenly;
 `
 
-const TextBoxDiv = styled(motion.div)`
-color: white;
-justify-content: start;
-font-size: 18px;
-font-family: 'TruenoLite';
-white-space: pre-wrap;
-width:75%;
-`
-const LargeTextBoxDiv = styled(motion.div)`
-color: white;
-justify-content: center;
-font-size: clamp(10px, 6vw, 50px);
-font-family: 'TruenoLite';
-white-space: pre-wrap;
-width:75%;
-`
+
 
 
 
 function App() {
-  const MainDivAnimation = { background: ["#fff", "#000"] };
   const MainDivTransition = { duration: 2, delay: 1 }
-  const [greeting, setGreeting] = useState(greetings[randomRangeInt(0, greetings.length - 1)])
   const [shownError, setShownError] = useState(false);
   const [pageScrollPercent, setPageScrollPercent] = useState(0);
   const tempText = "This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?";
 
 
-  const updateGreeting = async () => {
-    await sleep(5000); // Wait 5 seconds
-    let newGreeting = greetings[randomRangeInt(0, greetings.length - 1)];
-    while (greeting === newGreeting)
-      newGreeting = greetings[randomRangeInt(0, greetings.length - 1)];
-    setGreeting(newGreeting);
-  }
+
 
   useEffect(() => {
     if (!shownError) {
@@ -106,10 +73,7 @@ function App() {
     }
   }, [shownError]);
 
-  useEffect(() => {
-    updateGreeting();
 
-  }, [greeting]);
 
 
   const onPageScroll = (e: any) => {
@@ -125,32 +89,49 @@ function App() {
 
 
   return (
-    <PageDiv animate={MainDivAnimation} transition={MainDivTransition} >
+    <PageDiv  >
       <Scrollbars thumbSize={100} renderThumbVertical={() => { return <div style={{ background: "white" }} /> }} onScroll={(e: any) => onPageScroll(e)}>
         <MainDiv >
-          <ContentCenterDiv><TitleDiv>Brandon Kuenzi</TitleDiv></ContentCenterDiv>
-          <ContentCenterDiv><TaglineDiv>{"... " + greeting}</TaglineDiv></ContentCenterDiv>
+          <TitleDiv text="Brandon Kuenzi" pageScrollPercent={pageScrollPercent} />
+          <TaglineControl pageScrollPercent={pageScrollPercent} />
+          <div style={{ marginTop: 50 }} />
           <SlidingText text={"To begin your adventure"} direction='left' pageScrollPercent={pageScrollPercent} />
           <SlidingText text={"simply scroll down."} direction='right' pageScrollPercent={pageScrollPercent} />
-
-          <div style={{ marginTop: 300 }} />
+          <TickerTape text={["React", "Typescript", "Javascript", "CSS", "HTML", "C#", "HL7"]} pageScrollPercent={pageScrollPercent} />
+          <div style={{ marginTop: 200 }} />
           <SubtleRotateText text="These words" pageScrollPercent={pageScrollPercent} />
-          <SubtleRotateText text="fold over as" pageScrollPercent={pageScrollPercent} />
+          <SubtleRotateText text="animate as" pageScrollPercent={pageScrollPercent} />
           <SubtleRotateText text="you scroll" pageScrollPercent={pageScrollPercent} />
           <SubtleRotateText text="the page" pageScrollPercent={pageScrollPercent} />
           <SlidingText text={tempText} direction='left' pageScrollPercent={pageScrollPercent} />
           <SlidingText text={tempText} direction='right' pageScrollPercent={pageScrollPercent} />
+          <TickerTape text={["Visual Studio", "Visual Studio Code", "Unity", "Git", "AWS", "Azure"]} pageScrollPercent={pageScrollPercent} />
           <ParallaxImage text={"\"Marrying Brandon was the best decision I ever made\" \n - Courtney K"} image={laptop} screenHeightPercent={.4} pageScrollPercent={pageScrollPercent} parallaxSpeedX='slow' parallaxSpeedY='fast' />
+          <div style={{ marginTop: 100 }} />
           <SubtleRotateText text="Software Developer" pageScrollPercent={pageScrollPercent} />
           <SubtleRotateText text="UI/UX" pageScrollPercent={pageScrollPercent} />
           <SubtleRotateText text="React" pageScrollPercent={pageScrollPercent} />
           <SubtleRotateText text="Typescript" pageScrollPercent={pageScrollPercent} />
           <SubtleRotateText text="Unity" pageScrollPercent={pageScrollPercent} />
+          <div style={{ marginTop: 100 }} />
+          <SenseOfHumor pageScrollPercent={pageScrollPercent} />
           <SlidingText text={tempText} direction='left' pageScrollPercent={pageScrollPercent} />
           <SlidingText text={tempText} direction='right' pageScrollPercent={pageScrollPercent} />
+          <div style={{ marginTop: 100 }} />
+
           <ParallaxImage text={"\"I wish I had contacted Brandon sooner.\" \n - Courtney K"} image={codeImg} screenHeightPercent={.5} pageScrollPercent={pageScrollPercent} parallaxSpeedX='fast' parallaxSpeedY='slow' />
+
+          <div style={{ marginTop: 100 }} />
+
+
           <SlidingText text={tempText} direction='left' pageScrollPercent={pageScrollPercent} />
           <SlidingText text={tempText} direction='right' pageScrollPercent={pageScrollPercent} />
+          <div style={{ marginTop: 200 }} />
+          <HorizFlexDiv>
+            <Card titleText='Bold Title' contentText={"This is a card component's subtext"} startOffsetY={-30} pageScrollPercent={pageScrollPercent} />
+            <Card titleText='Bold Title' contentText={"This is a card component's subtext"} startOffsetY={0} pageScrollPercent={pageScrollPercent} />
+            <Card titleText='Bold Title' contentText={"This is a card component's subtext"} startOffsetY={-80} pageScrollPercent={pageScrollPercent} />
+          </HorizFlexDiv>
           <div style={{ marginTop: 500 }} />
 
         </MainDiv>
