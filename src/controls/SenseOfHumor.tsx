@@ -51,10 +51,12 @@ justify-content:center;
 font-size: clamp(8px, 3vw, 14px);
 align-items: center;
 border-radius: 90px;
-width:250px;
 height:50px;
 color:black;
+padding:0px 30px;
+white-space: pre;
 background:white;
+z-index: 2;
 `
 const SenseOfHumor = (props: SenseOfHumorProps) => {
     const width = 250;
@@ -114,10 +116,10 @@ const SenseOfHumor = (props: SenseOfHumorProps) => {
 
     return (<MainDiv>
         <TitleTextDiv>Sense Of Humor</TitleTextDiv>
-        <ContentTextDiv>They say my sense of humor is like a refreshing oasis in a desert, but let's be honest - sometimes it's more like a cactus: prickly, but still strangely satisfying. </ContentTextDiv>
+        <ContentTextDiv>They say my sense of humor is like a refreshing oasis in a desert, but let's be honest - the proof is in the pudding. I've provided some "pudding" below. </ContentTextDiv>
 
         <ButtonHolderDiv>
-            <FakeButtonDiv onHoverStart={onClick} onClick={onClick} ref={buttonRef} x={(position.x.toString() + "px") as any} y={(position.y.toString() + "px") as any}>Click here for examples</FakeButtonDiv>
+            <FakeButtonDiv onHoverStart={onClick} onClick={onClick} ref={buttonRef} x={(position.x.toString() + "px") as any} y={(position.y.toString() + "px") as any}>Click here to learn more about my humor</FakeButtonDiv>
 
         </ButtonHolderDiv>
     </MainDiv>)
