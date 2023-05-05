@@ -19,6 +19,9 @@ align-items: start;
 gap:10px;
 padding: 100px;
 color: #000000;
+overflow: visible;
+height: 150px;
+
 //box-shadow: 0px 0px 15px #fff;
 background:whitesmoke;
 border-radius: 20px;
@@ -30,7 +33,7 @@ max-width: 30%;
 const TitleTextDiv = styled(motion.div)`
 color: black;
 justify-content: center;
-font-size: clamp(10px, 2vw, 30px);
+font-size: clamp(3px, 1.5vw, 30px);
 font-family: 'Trueno';
 white-space: pre-wrap;
 `

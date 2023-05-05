@@ -12,6 +12,7 @@ interface TickerTapeProps {
 
 const MainContainerDiv = styled(motion.div)`
 display: flex;
+position:relative;
 margin-top: 100px;
 flex-direction: row;
 justify-content: start;
@@ -19,16 +20,20 @@ align-items: start;
 gap:100px;
 padding: 0% 0%;
 color: white;
-box-sizing: border-box;
 width: 100%;
+height: 100px;
+overflow:hidden;
 `
 const TextContainerDiv = styled(motion.div)`
 position: absolute;
+left:0;
+top:0;
 color: white;
 justify-content: center;
 font-size: clamp(10px, 6vw, 50px);
 font-family: 'TruenoLite';
 white-space: nowrap;
+overflow:visible;
 `
 
 const TextDiv = styled(motion.div)`
@@ -40,6 +45,8 @@ justify-content: center;
 font-size: clamp(10px, 6vw, 50px);
 font-family: 'TruenoLite';
 white-space: pre-wrap;
+overflow:visible;
+
 `
 
 
