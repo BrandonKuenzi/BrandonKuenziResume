@@ -7,6 +7,7 @@ interface CardProps {
     titleText: string;
     contentText: string;
     startOffsetY: number;
+    startOffsetRotate?: number;
 }
 
 
@@ -47,8 +48,14 @@ const Card = (props: CardProps) => {
         let progress = (-av.toCenter);
         if (progress < 0) progress = 0;
         let y = props.startOffsetY * progress;
-        return { y: y, } as unknown as AnimationControls
+
+        let rotateStart = props.startOffsetRotate ? props.startOffsetRotate : 0;
+        let rotate = rotateStart * progress;
+
+
+        return { y: y, rotateZ: rotate } as unknown as AnimationControls
     }
+
     return (<MainCardDiv ref={ref} animate={getOffsetY(animValue)} transition={{ duration: 0 }}>
         <TitleTextDiv>{props.titleText}</TitleTextDiv>
         <ContentTextDiv>{props.contentText}</ContentTextDiv>

@@ -13,7 +13,6 @@ padding: 0% 20%;
 box-sizing: border-box;
 color: white; 
 justify-content: start;
-margin-top: 100px;
 width:100%;
 `
 const ContentRightDiv = styled(motion.div)`
@@ -24,7 +23,6 @@ text-align: end;
 display: flex;
 align-items: end;
 justify-content: end;
-margin-top: 100px;
 width:100%;
 `
 
@@ -37,6 +35,9 @@ white-space: pre-wrap;
 width:75%;
 `
 const slideAcrossRightAnim = (av: AnimValue): AnimationControls => {
+    if (av.onScreen < 0)
+        return {} as unknown as AnimationControls;
+
     let progress = (1 - av.toCenter) * 2;
     if (progress > 1 && progress < 2) progress = 1;
 
@@ -50,6 +51,9 @@ const slideAcrossRightAnim = (av: AnimValue): AnimationControls => {
     return { x: x, opacity: opacity } as unknown as AnimationControls
 }
 const slideAcrossLeftAnim = (av: AnimValue): AnimationControls => {
+    if (av.onScreen < 0)
+        return {} as unknown as AnimationControls;
+
     let progress = (1 - av.toCenter) * 2;
     if (progress > 1 && progress < 2) progress = 1;
 
