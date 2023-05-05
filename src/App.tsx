@@ -30,6 +30,7 @@ import FlippingText from './controls/FlippingText';
 
 const PageDiv = styled(motion.div)`
 position: absolute;
+overflow-x: hidden;
 top:0;
 bottom: 0;
 right: 0;
@@ -48,7 +49,7 @@ border: 0px solid whitesmoke;
 const MainDiv = styled(motion.div)`
 color: white;
 display: flex;
-overflow: clip;
+overflow: hidden;
 width: 100%;
 flex-direction: column;
 gap:15px;
@@ -61,11 +62,12 @@ flex-direction: row;
 align-items: center;
 width: 80%;
 justify-content: space-evenly;
+overflow: visible;
 `
 const TextParagraphDiv = styled(motion.div) <{ color?: string | undefined }>`
 color: ${props => props.color ? props.color : "white"};
 display: flex;
-overflow: clip;
+overflow: hidden;
 font-family: 'TruenoLite';
 font-size: clamp(10px, 6vw, 30px);
 width: 60%;
@@ -118,7 +120,9 @@ function App() {
             <TaglineControl pageScrollPercent={pageScrollPercent} />
           </div>
           <div style={{ marginTop: window.screen.height / 8 }} />
-          <TextParagraphDiv animate={{ opacity: 1 }} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 2 }}>Scroll to Begin</TextParagraphDiv>
+          <TextParagraphDiv animate={{ opacity: 1 }} initial={{ opacity: 0 }} transition={{ duration: 1, delay: 2 }}>
+            <motion.div animate={{ rotateZ: [0, 0, 2, -2, 0, 0], opacity: [.4, .4, 1, .4] }} transition={{ duration: 4, repeat: Infinity }}>Scroll to Begin</motion.div>
+          </TextParagraphDiv>
           <div style={{ marginTop: window.screen.height / 8 }} />
           <ParallaxImage text='Scrolling tutorial complete' image={stars} screenHeightPercent={.4} pageScrollPercent={pageScrollPercent} parallaxSpeedX='fast' parallaxSpeedY='insane' ></ParallaxImage>
           <div style={{ marginTop: 100 }} />

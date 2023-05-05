@@ -35,7 +35,7 @@ width:75%;
 
 const subtleRotateInAnim = (av: AnimValue): AnimationControls => {
     if (av.onScreen < 0)
-        return {} as unknown as AnimationControls;
+        return { rotateX: -90 } as unknown as AnimationControls;
 
     let rotate = (av.toTop) * 100;
     rotate = rotate - 100;

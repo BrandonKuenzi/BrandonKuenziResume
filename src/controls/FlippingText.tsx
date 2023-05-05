@@ -17,17 +17,18 @@ flex-direction: row;
 gap:0;
 align-items: start;
 justify-content: start;
-padding: 0% 20%;
 color: white;
 box-sizing: border-box;
 width:100%;
+padding-left: 20%;
 `
 
 
 const LargeTextBoxDiv = styled(motion.div)`
 color: white;
 justify-content: center;
-font-size: clamp(10px, 6vw, 50px);
+font-size: clamp(.5vw, 4vw, 15vw);
+
 font-family: 'TruenoLite';
 white-space: pre-wrap;
 transform-origin:80% 80%;
@@ -46,7 +47,9 @@ const FlippingTextDiv = styled(motion.div)`
 color: white;
 justify-content: center;
 align-items: center;
-font-size: clamp(10px, 6vw, 50px);
+font-size: clamp(.5vw, 4vw, 15vw);
+
+
 font-family: 'TruenoLite';
 white-space: pre;
 transform-origin:80% 80%;
@@ -56,7 +59,8 @@ const FlippingInvisibleDiv = styled(motion.div)`
 height: 0;
 color: transparent;
 align-items: end;
-font-size: clamp(10px, 6vw, 50px);
+font-size: clamp(.5vw, 4vw, 15vw);
+
 font-family: 'TruenoLite';
 white-space: pre;
 transform-origin:80% 80%;

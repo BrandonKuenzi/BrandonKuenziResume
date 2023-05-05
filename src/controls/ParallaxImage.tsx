@@ -88,9 +88,9 @@ const ParallaxImage = (props: ParallaxImageProps) => {
     }
     const textAnim = (av: AnimValue): AnimationControls => {
         if (animValue.onScreen < 0)
-            return {} as unknown as AnimationControls
+            return { opacity: 0 } as unknown as AnimationControls
 
-        return { y: av.toCenter * 500, } as unknown as AnimationControls
+        return { y: av.toCenter * 500, opacity: 1 } as unknown as AnimationControls
     }
 
     return (
