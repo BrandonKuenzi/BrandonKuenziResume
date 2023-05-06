@@ -27,6 +27,7 @@ background-size: 150% auto;
 `
 const ContainerDiv = styled(motion.div) <{ parallax_progress_x: string, parallax_progress_y: string, height: number, bg_image: string }>`
 display: flex;
+position:relative;
 color: white;
 background-image:${props => `url(${props.bg_image})`};
 justify-content: center;
@@ -41,6 +42,19 @@ background-size: 150% auto;
 
 `
 
+const ContentContainerDiv = styled(motion.div)`
+display: flex;
+position: absolute;
+color: white;
+justify-content: center;
+align-items:center;
+left:0;
+right:0;
+top:0;
+bottom:0;
+overflow:  clip;
+`
+
 const TextBoxDiv = styled(motion.div) <{ width: any, usegiantfont: boolean, color: string }>`
 color: ${props => props.color};
 display: flex;
@@ -49,6 +63,7 @@ justify-content: center;
 font-size: clamp(12px,${props => props.usegiantfont ? "5vh" : "4vh"} ,80px);
 font-family: 'TruenoBold';
 white-space: pre-wrap;
+overflow:visible;
 width: ${props => props.width};
 `
 
@@ -86,6 +101,7 @@ const ParallaxImage = (props: ParallaxImageProps) => {
 
         return (value).toString() + "%";
     }
+
     const textAnim = (av: AnimValue): AnimationControls => {
         if (animValue.onScreen < 0)
             return { opacity: 0 } as unknown as AnimationControls
@@ -96,7 +112,9 @@ const ParallaxImage = (props: ParallaxImageProps) => {
     return (
 
         <ContainerDiv animate={{ opacity: [0, 1] }} transition={{ duration: 2, delay: 1 }} parallax_progress_y={animValue.onScreen > 0 ? getOffsetY() : "0px"} parallax_progress_x={animValue.onScreen > 0 ? getOffsetX() : "0px"} bg_image={animValue.onScreen > 0 ? props.image : "white"} height={height} ref={ref} >
-            {props.children && props.children}
+            {props.children &&
+                <ContentContainerDiv >{
+                    props.children}</ContentContainerDiv>}
             {props.text && <TextBoxDiv color={color} animate={textAnim(animValue)} width={((width).toString() + "px") as any} transition={{ duration: 0 }} usegiantfont={props.useGiantFont ? props.useGiantFont : false}>{props.text}</TextBoxDiv>}
         </ContainerDiv>
     )

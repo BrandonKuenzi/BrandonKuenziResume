@@ -17,11 +17,9 @@ flex-direction: column;
 justify-content: start;
 align-items: start;
 gap:10px;
-padding: 100px;
 color: #000000;
 overflow: visible;
-height: 150px;
-
+height: 220px;
 //box-shadow: 0px 0px 15px #fff;
 background:whitesmoke;
 border-radius: 20px;
@@ -36,6 +34,7 @@ justify-content: center;
 font-size: clamp(3px, 1.5vw, 30px);
 font-family: 'Trueno';
 white-space: pre-wrap;
+overflow: visible;
 `
 const ContentTextDiv = styled(motion.div)`
 color: black;
@@ -43,6 +42,8 @@ justify-content: center;
 font-size: clamp(8px, 2vw, 25px);
 font-family: 'TruenoLite';
 white-space: pre-wrap;
+overflow: visible;
+padding-bottom: 5;
 `
 
 const Card = (props: CardProps) => {

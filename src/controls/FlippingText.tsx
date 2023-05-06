@@ -9,11 +9,13 @@ interface FlippingTextProps {
     flippingText: string[];
     afterText: string;
     pageScrollPercent: number;
+    only2?: boolean;
 }
 
-const ContentDiv = styled(motion.div)`
+const ContentDiv = styled(motion.div) <{ only2: boolean }>`
 display: flex;
 flex-direction: row;
+flex-wrap: ${props => props.only2 ? "wrap" : "no-wrap"};
 gap:0;
 align-items: start;
 justify-content: start;
@@ -21,6 +23,7 @@ color: white;
 box-sizing: border-box;
 width:100%;
 padding-left: 20%;
+padding-right: 20%;
 `
 
 
@@ -28,25 +31,25 @@ const LargeTextBoxDiv = styled(motion.div)`
 color: white;
 justify-content: center;
 font-size: clamp(.5vw, 4vw, 15vw);
-
 font-family: 'TruenoLite';
 white-space: pre-wrap;
 transform-origin:80% 80%;
 `
-const FlippingHolderDiv = styled(motion.div)`
+
+const FlippingHolderDiv = styled(motion.div) <{ only2: boolean }>`
 display: flex;
 flex-direction: column;
 position: relative;
 color: white;
-justify-content: center;
-align-items: center;
-text-align: center;
+justify-content:  ${props => props.only2 ? "start" : "center"};
+align-items:  ${props => props.only2 ? "start" : "center"};
+text-align:  ${props => props.only2 ? "start" : "center"};
 `
 
-const FlippingTextDiv = styled(motion.div)`
+const FlippingTextDiv = styled(motion.div) <{ only2: boolean }>`
 color: white;
-justify-content: center;
-align-items: center;
+justify-content:  ${props => props.only2 ? "start" : "center"};
+align-items:  ${props => props.only2 ? "start" : "center"};
 font-size: clamp(.5vw, 4vw, 15vw);
 
 
@@ -69,18 +72,7 @@ text-align: center;
 
 
 
-const subtleRotateInAnim = (av: AnimValue): AnimationControls => {
-    let rotate = (av.toTop) * 100;
-    rotate = rotate - 100;
-    if (rotate < -90)
-        rotate = -90;
 
-    let opacity = av.toTop;
-    if (opacity > .5)
-        opacity = opacity * 1.5;
-    if (opacity > 1) opacity = 1;
-    return { rotateX: -rotate, opacity: opacity } as unknown as AnimationControls
-}
 
 const FlippingText = (props: FlippingTextProps) => {
     const { componentRef: ref, animValue: animValue } = useScrollValues(props.pageScrollPercent);
@@ -131,10 +123,12 @@ const FlippingText = (props: FlippingTextProps) => {
 
 
     return (
-        <ContentDiv ref={ref} animate={subtleRotateInAnim(animValue)} transition={{ duration: 0 }}>
-            <LargeTextBoxDiv>{props.beforeText}</LargeTextBoxDiv>
-            <FlippingHolderDiv>
-                <FlippingTextDiv ref={scope} animate={{ rotateX: animValue.onScreen > 0 ? rotation : 0 }} transition={{ duration: 3, }}  >{props.flippingText[index]}</FlippingTextDiv>
+        <ContentDiv only2={props.only2 ? true : false} ref={ref} transition={{ duration: 0 }}>
+            {props.only2 ? props.beforeText.split(" ").map((word, idx) => <LargeTextBoxDiv key={"individualWord" + idx + word}>{word + " "}</LargeTextBoxDiv>) :
+                <LargeTextBoxDiv>{props.beforeText}</LargeTextBoxDiv>
+            }
+            <FlippingHolderDiv only2={props.only2 ? true : false} >
+                <FlippingTextDiv only2={props.only2 ? true : false} ref={scope} animate={{ rotateX: animValue.onScreen > 0 ? rotation : 0 }} transition={{ duration: 3, }}  >{props.flippingText[index]}</FlippingTextDiv>
                 {props.flippingText.map((text) => {
                     return <FlippingInvisibleDiv>{text}</FlippingInvisibleDiv>
                 })}
