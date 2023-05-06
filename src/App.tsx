@@ -7,15 +7,17 @@ import { sleep } from './utils/sleep';
 import Scrollbars from 'react-custom-scrollbars';
 import { AnimValue, useScrollValues } from './utils/customHooks/useScrollValues';
 import ParallaxImage from './controls/ParallaxImage';
-import Fall2015 from "./images/Fall2015.png"
+import Fall2015 from "./images/Fall2015.jpg"
 import coolThing from "./images/coolThing.jpg"
 import dots from "./images/dots.jpg"
 import airplane from "./images/airplane.jpg"
+import goodbye from "./images/goodbye.jpg"
 import stars from "./images/stars.jpg"
 import freelance from "./images/freelance.jpg"
 import dusty from "./images/dusty.jpg"
 import road from "./images/Road.jpg"
 import sand from "./images/sand.jpg"
+import tinyDinoIcon from "./images/tinyDinoIcon.png"
 import codeImg from "./images/codeImg.jpg"
 import laptop from "./images/laptop.jpg"
 import SlidingText from './controls/SlidingText';
@@ -26,6 +28,8 @@ import TickerTape from './controls/TickerTape';
 import Card from './controls/Card';
 import SenseOfHumor from './controls/SenseOfHumor';
 import FlippingText from './controls/FlippingText';
+import HeadingAndContent from './controls/HeadingAndContent';
+import TinyDino from './controls/TinyDino';
 
 
 const PageDiv = styled(motion.div)`
@@ -56,11 +60,46 @@ gap:15px;
 align-items: center;
 justify-content: center;
 `
+
+const SendEmailButton = styled(motion.button)`
+color: black;
+display: flex;
+overflow: hidden;
+padding:10px 50px;
+margin-right: 50%;
+border-radius: 20px;
+border-color: transparent;
+box-shadow: 0px 6px 30px #0007;
+font-family: 'Trueno';
+font-size: 18px;
+flex-direction: column;
+gap:15px;
+align-items: center;
+justify-content: center;
+`
+
+
 const HorizFlexDiv = styled(motion.div)`
 display: flex;
 flex-direction: row;
 align-items: center;
 width: 80%;
+justify-content: space-evenly;
+overflow: visible;
+`
+const VertFlexEndDiv = styled(motion.div)`
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 80%;
+justify-content: center;
+gap:0;
+overflow: visible;
+`
+const DinoCage = styled(motion.div)`
+position:relative;
+width: 100%;
+height:0px;
 justify-content: space-evenly;
 overflow: visible;
 `
@@ -77,6 +116,10 @@ justify-content: center;
 margin-top: 50px;
 `
 
+const TinyDinoEmojii = styled(motion.img)`
+width: 75px;
+height: 75px;
+`
 
 
 
@@ -87,6 +130,10 @@ function App() {
   const tempText = "This is my website. Im working on branding right now. So this is just some content to test out the font I picked. How does it look?";
 
 
+  const handleEmailClicked = () => {
+    const subject = "Connection from www.brandonkuenzi.com";
+    window.location.href = `mailto:tinydinosoftware@gmail.com?subject=${encodeURIComponent(subject)}&body=Hello Brandon. I just saw your website and I was absolutely blown away with the quality! I wanted to tell you...`;
+  };
 
 
   useEffect(() => {
@@ -115,6 +162,7 @@ function App() {
     <PageDiv  >
       <Scrollbars thumbSize={100} renderThumbVertical={() => { return <div style={{ background: "white" }} /> }} onScroll={(e: any) => onPageScroll(e)}>
         <MainDiv >
+          <TinyDino />
           <div style={{ width: "100%" }}>
             <TitleDiv text="Brandon Kuenzi" pageScrollPercent={pageScrollPercent} />
             <TaglineControl pageScrollPercent={pageScrollPercent} />
@@ -173,15 +221,16 @@ function App() {
 
 
           <div style={{ marginTop: 200 }} />
+          <DinoCage animate={{ rotateY: 180 }}><TinyDino /></DinoCage>
           <TextParagraphDiv> Now a bit about me, personally</TextParagraphDiv>
           <div style={{ marginTop: 200 }} />
-          <ParallaxImage text='Alaska has been my home since 2011' color='black' image={Fall2015} screenHeightPercent={.4} pageScrollPercent={pageScrollPercent} parallaxSpeedX='slow' parallaxSpeedY='fast' ></ParallaxImage>
+          <ParallaxImage text='Alaska has been my home since 2011' color='black' image={Fall2015} screenHeightPercent={.4} pageScrollPercent={pageScrollPercent} parallaxSpeedX='slow' parallaxSpeedY='insane' ></ParallaxImage>
           <div style={{ marginTop: 200 }} />
           <SubtleRotateText text={"My Hobbies"} pageScrollPercent={pageScrollPercent} ></SubtleRotateText>
           <div style={{ marginTop: 100 }} />
           <HorizFlexDiv>
             <Card titleText='Astrophotography' contentText={"Alaska produces great shots of the night sky, including shots of the northern lights"} startOffsetY={-30} pageScrollPercent={pageScrollPercent} />
-            <Card titleText='DIY Electronics' contentText={"Arduinos, FPV drones, and more. My workbench always has some project on it."} startOffsetY={0} pageScrollPercent={pageScrollPercent} startOffsetRotate={-2} />
+            <Card titleText='DIY Electronics' contentText={"Arduinos, FPV drones, and 3d printing. My workbench always has some project on it."} startOffsetY={0} pageScrollPercent={pageScrollPercent} startOffsetRotate={-2} />
             <Card titleText='Music Production' contentText={"Piano, uke, bass, and synth. Those are what I find myself plinking away on usually."} startOffsetY={-80} pageScrollPercent={pageScrollPercent} />
           </HorizFlexDiv>
           <HorizFlexDiv>
@@ -190,6 +239,7 @@ function App() {
             <Card titleText='Rocks' contentText={"I'm the guy that stops and stares at gravel. My collection of shiny rocks grows monthly."} startOffsetY={-10} pageScrollPercent={pageScrollPercent} startOffsetRotate={1} />
           </HorizFlexDiv>
           <div style={{ marginTop: 200 }} />
+          <DinoCage animate={{ rotateY: 180 }}><TinyDino /></DinoCage>
 
           <TextParagraphDiv> And I am one of THOSE developers that also like to code in my free time. Some of my personal projects in progress: </TextParagraphDiv>
 
@@ -198,30 +248,50 @@ function App() {
           <div style={{ marginTop: 50 }} />
           <SubtleRotateText text="Library of the Unknown - an online collection of science mysteries yet to be solved. Built using React and AWS" pageScrollPercent={pageScrollPercent} isSubText={true} />
           <div style={{ marginTop: 50 }} />
+          <DinoCage ><TinyDino delayStart={6} /></DinoCage>
           <SubtleRotateText text="brandonkuenzi.com - That's right. This website is an ongoing project. " pageScrollPercent={pageScrollPercent} isSubText={true} />
           <div style={{ marginTop: 200 }} />
 
-          <ParallaxImage text={"\"I wish I had contacted Brandon sooner.\" \n - Future you"} image={codeImg} screenHeightPercent={.5} pageScrollPercent={pageScrollPercent} parallaxSpeedX='fast' parallaxSpeedY='slow' />
+          <ParallaxImage text={"\"I wish I had contacted Brandon sooner.\" \n - Future you"} image={codeImg} screenHeightPercent={.5} pageScrollPercent={pageScrollPercent} parallaxSpeedX='off' parallaxSpeedY='insane' />
           <div style={{ marginTop: 100 }} />
 
 
           <SenseOfHumor pageScrollPercent={pageScrollPercent} />
           <div style={{ marginTop: 200 }} />
 
-          <SlidingText text={"\"Working with Brandon is a delight and a pleasure. He is my go-to guy for anything tech related\"\n - Courtney K"} direction='left' pageScrollPercent={pageScrollPercent} />
+          <SlidingText text={"\"Working with Brandon is a delight and a pleasure. He is my go-to guy for anything tech related\"\n\n - Courtney K"} direction='left' pageScrollPercent={pageScrollPercent} />
           <div style={{ marginTop: 50 }} />
-          <SlidingText text={"This part of the website is like references on an application"} direction='right' pageScrollPercent={pageScrollPercent} />
+          <SlidingText text={"\"Brandon is very comfortable to work with. He collaborates well, codes considerately, and communicates productively. If you want good, fast work, then he's great! If you're looking for drama and lame excuses, then you'll need to find someone else.\" \n \n- Jocob K."} direction='right' pageScrollPercent={pageScrollPercent} />
           <div style={{ marginTop: 50 }} />
-          <SlidingText text={"\"More quotes coming soon\"\n -Brandon K"} direction='right' pageScrollPercent={pageScrollPercent} />
+          <SlidingText text={"\"More quotes coming soon\"\n\n -Brandon K"} direction='right' pageScrollPercent={pageScrollPercent} />
           <div style={{ marginTop: 50 }} />
-          <SlidingText text={"\"Here is just one more example of what I plan on doing on this part of the website. \"\n -Brandon K"} direction='left' pageScrollPercent={pageScrollPercent} />
+          <SlidingText text={"\"Think of this as the references part of an application. \"\n\n -Brandon K"} direction='left' pageScrollPercent={pageScrollPercent} />
           <div style={{ marginTop: 200 }} />
-          <ParallaxImage screenHeightPercent={.75} text={"Thank you for visiting. Check back for more updates!"} pageScrollPercent={pageScrollPercent} image={road} />
-          <div style={{ marginTop: 400 }} />
-          <div>{"😉 -Brandon Kuenzi"}</div>
+          <HeadingAndContent headingText="Let's Collaborate" contentText={["Thank you for taking the time to explore my website and learn more about my web development skills.", "As a freelance developer, I am always on the lookout for new and exciting projects to work on. If you have a project that requires a skilled developer with a passion for creating beautiful and functional websites, please don't hesitate to contact me.", "Whether you need a simple prototype or a complex web application, I am confident that I can deliver a high-quality product that meets your needs.", "If you are looking for a dedicated and reliable developer to join your team, I am also open to exploring full-time opportunities."]} pageScrollPercent={pageScrollPercent} />
           <div style={{ marginTop: 100 }} />
+          <FlippingText only2={true} beforeText="Let's work together to create something " flippingText={["amazing!", "innovative!", "intuitive!", "efficient!", "reliable!", "flexible!", "powerful!", "fast!", "responsive!", "user-friendly!", "customizable!", "secure!", "stable!", "scalable!", "feature-rich!"]} afterText='' pageScrollPercent={pageScrollPercent} />
+          <div style={{ marginTop: 100 }} />
+          <ParallaxImage screenHeightPercent={.4} pageScrollPercent={pageScrollPercent} parallaxSpeedX='fast' parallaxSpeedY='insane' image={goodbye} >
+            <SendEmailButton whileHover={{ scale: .95, color: "#55f" }} onClick={handleEmailClicked}>Send me an email</SendEmailButton>
+          </ParallaxImage>
+          <div style={{ marginTop: 20 }} />
+          <div style={{ fontFamily: "Trueno", fontSize: 20 }}>{"Thank you for visiting. Check back for updates."}</div>
+          <div style={{ marginTop: 20 }} />
+          <DinoCage><TinyDino /></DinoCage>
+          <VertFlexEndDiv >
+            <TinyDinoEmojii src={tinyDinoIcon} />
+            <div style={{ fontFamily: "TruenoLite", fontSize: 20 }}>{" Brandon Kuenzi"}</div>
+            <div style={{ color: "#555" }}>{"v1.23.0505"}</div>
+
+          </VertFlexEndDiv>
+          <div style={{ marginTop: 20 }} />
+
         </MainDiv>
+
       </Scrollbars>
+
+
+
     </PageDiv >
   );
 }

@@ -18,6 +18,7 @@ color: #fff;
 box-sizing: border-box;
 padding:20px;
 width:80%;
+overflow: visible;
 `
 
 const TitleTextDiv = styled(motion.div)`
@@ -41,6 +42,7 @@ position: relative;
 margin-top: 20px;
 width:150px;
 height: 50%;
+overflow: visible;
 `
 const FakeButtonDiv = styled(motion.div) <{ x: any, y: number }>`
 position: absolute;
